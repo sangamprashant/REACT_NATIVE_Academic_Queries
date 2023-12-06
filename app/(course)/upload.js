@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const paper = () => {
+const upload = () => {
   return (
     <View>
-      <Text>paper</Text>
+      <Text>upload</Text>
     </View>
   )
 }
 
-export default paper
+export default upload

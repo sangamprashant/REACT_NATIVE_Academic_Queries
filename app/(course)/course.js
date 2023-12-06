@@ -1,12 +1,14 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { ScrollView } from "react-native";
+import React from "react";
+import { Cources, HomeTitle } from "../../components";
 
-const course = () => {
+const Course = () => {
   return (
-    <View>
-      <Text>course</Text>
-    </View>
-  )
-}
+    <ScrollView style={{ padding: 10 }}>
+      <HomeTitle />
+      <Cources />
+    </ScrollView>
+  );
+};
 
-export default course
+export default Course;
