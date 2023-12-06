@@ -7,14 +7,19 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
+import { useNavigation } from "expo-router";
 
 const CourceCard = ({ course }) => {
+  const navigation = useNavigation();
+
+  const handleCoursePress = () => {
+    navigation.navigate("courseOpen", { coursePath: course.coursePath, courseName: course.courseName });
+  };
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={handleCoursePress}>
       <View key={course._id} style={styles.card}>
         <Image source={{ uri: course.courseImage }} style={styles.cardImage} />
         <Text style={styles.cardTitle}>{course.courseName}</Text>
-        {/* <Text style={styles.cardText}>{course.coursePath}</Text> */}
       </View>
       
     </TouchableOpacity>
@@ -28,7 +33,7 @@ const styles = StyleSheet.create({
     width: (width - 30) / 2,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#cecece1c",
     borderRadius: 8,
     overflow: "hidden",
   },
@@ -38,6 +43,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   cardTitle: {
+    color:"white",
     fontSize: 18,
     fontWeight: "bold",
     margin: 8,
