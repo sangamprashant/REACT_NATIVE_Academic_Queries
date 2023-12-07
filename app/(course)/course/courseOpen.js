@@ -1,63 +1,125 @@
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
   SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  TextInput,
 } from "react-native";
-import React, { useContext } from "react";
 import { useRoute } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient"; // Import LinearGradient from expo
-
 import { AppContext } from "../../../AppContext/AppContext";
-import { useNavigation } from "expo-router";
+import {
+  CollegeSelect,
+  CourcesHorizontal,
+  HorizontalOption,
+  PaperTable,
+  SubjectInput,
+} from "../../../components";
+import axios from "axios";
+import { BASE_API } from "@env";
 
 const CourseScreen = () => {
   const route = useRoute();
   const { coursePath, courseName } = route.params;
   const { courses } = useContext(AppContext);
-  const navigation = useNavigation();
+  const [pdfFiles, setPdfFiles] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [searchYear, setSearchYear] = useState("");
+  const [searchType, setSearchType] = useState("");
+  const [uniqueYears, setUniqueYears] = useState([]);
+  const [uniqueTypes, setUniqueTypes] = useState([]);
+  const [papers, setPapers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleCoursePress = (course) => {
-    navigation.navigate("courseOpen", {
-      coursePath: course.coursePath,
-      courseName: course.courseName,
-    });
+  useEffect(() => {
+    setSearchType("");
+    setSearchYear("");
+    fetchPaper(coursePath);
+  }, [coursePath]);
+
+  const fetchPaper = async (coursePath) => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`${BASE_API}/course/${coursePath}`);
+      setPapers(response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
+  useEffect(() => {
+    const years = [...new Set(papers.map((file) => file.year))];
+    setUniqueYears(years);
+
+    const types = [...new Set(papers.map((file) => file.type))];
+    setUniqueTypes(types);
+  }, [papers]);
+
+  useEffect(() => {
+    let filteredPdfFiles = papers;
+
+    if (searchYear) {
+      filteredPdfFiles = filteredPdfFiles.filter(
+        (file) => file.year === Number(searchYear)
+      );
+    }
+
+    if (searchType) {
+      filteredPdfFiles = filteredPdfFiles.filter((file) =>
+        file.type.toLowerCase().includes(searchType.toLowerCase())
+      );
+    }
+
+    if (searchInput) {
+      filteredPdfFiles = filteredPdfFiles.filter((file) => {
+        const subject = file.subject.toLowerCase();
+        const searchTerm = searchInput.toLowerCase();
+        return subject.includes(searchTerm);
+      });
+    }
+
+    setPdfFiles(filteredPdfFiles);
+  }, [papers, searchYear, searchType, searchInput]);
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#111111", padding: 20 }}>
-      <View>
-        <Text style={{ color: "white" }}>All Cources</Text>
-      </View>
-      <View>
-        <ScrollView horizontal contentContainerStyle={{ paddingVertical: 10 }}>
-          {courses.map((course, index) => (
-            <TouchableOpacity
-              onPress={() => handleCoursePress(course)}
-              key={index}
-              style={{
-                marginRight: 10,
-                overflow: "hidden",
-                borderRadius: 10,
-                padding: 10,
-                height: 40,
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor:
-                  course.courseName === courseName ? "#3498db" : "white",
-              }}
-            >
-              <Text style={{ color: course.courseName === courseName ?  "white":"#3498db" , }}>{course.courseName}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
-      <View>
-        
-      </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#111111", padding: 10 }}>
+      {/* <CourcesHorizontal courses={courses} courseName={courseName} /> */}
+      {papers.length > 0 && (
+        <View>
+          <View style={styles.yearAndInput}>
+            <SubjectInput
+              searchInput={searchInput}
+              setSearchInput={setSearchInput}
+            />
+            <HorizontalOption
+              AppOptions={uniqueYears}
+              courseName={searchYear}
+              setSearchYear={setSearchYear}
+            />
+          </View>
+          <CollegeSelect  uniqueTypes={uniqueTypes} searchType={searchType} setSearchType={setSearchType}/>
+        </View>
+      )}
+      <PaperTable
+        coursePath={coursePath}
+        courseName={courseName}
+        loading={loading}
+        papers={pdfFiles}
+      />
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  yearAndInput: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    justifyContent: "space-between",
+  },
+});
 
 export default CourseScreen;

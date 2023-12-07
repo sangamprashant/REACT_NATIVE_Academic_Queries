@@ -8,6 +8,9 @@
       "expo-router"
     ],
     "name": "App",
-    "slug": "App"
+    "slug": "App",
+    "android": {
+      "package": "academicqueries.me"
+    }
   }
 }

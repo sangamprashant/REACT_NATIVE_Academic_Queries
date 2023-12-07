@@ -13,7 +13,10 @@ const CourceCard = ({ course }) => {
   const navigation = useNavigation();
 
   const handleCoursePress = () => {
-    navigation.navigate("courseOpen", { coursePath: course.coursePath, courseName: course.courseName });
+    navigation.navigate("courseOpen", {
+      coursePath: course.coursePath,
+      courseName: course.courseName,
+    });
   };
   return (
     <TouchableOpacity onPress={handleCoursePress}>
@@ -21,7 +24,6 @@ const CourceCard = ({ course }) => {
         <Image source={{ uri: course.courseImage }} style={styles.cardImage} />
         <Text style={styles.cardTitle}>{course.courseName}</Text>
       </View>
-      
     </TouchableOpacity>
   );
 };
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
     borderColor: "#cecece1c",
     borderRadius: 8,
     overflow: "hidden",
+    backgroundColor: "#e6e6e614",
   },
   cardImage: {
     width: "100%",
@@ -43,7 +46,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   cardTitle: {
-    color:"white",
+    color: "white",
     fontSize: 18,
     fontWeight: "bold",
     margin: 8,
