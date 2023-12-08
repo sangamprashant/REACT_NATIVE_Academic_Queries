@@ -1,25 +1,19 @@
 import { Stack } from "expo-router";
 
-export default function LayoutCourse() {
+export default function Layout() {
   return (
     <Stack>
       <Stack.Screen
-        options={() => ({
-          headerShown: false,
-        })}
-        name="index"
-      />
-      <Stack.Screen
+        name="CourseScreen"
         options={({ route }) => ({
           headerShown: true,
           headerStyle: {
-            backgroundColor: 'black',
+            backgroundColor: "black",
           },
-          headerTintColor:"white",
+          headerTintColor: "white",
           title: route.params.courseName || "Course",
           tabBarVisible: false,
         })}
-        name="courseOpen"
       />
     </Stack>
   );

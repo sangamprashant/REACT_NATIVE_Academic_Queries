@@ -1,4 +1,5 @@
 import Cources from "./Cources"
+import HomeHeader from "./HomeHeader"
 import HomeTitle from "./HomeTitle"
 import CollegeSelect from "./Reuse/CollegeSelect"
 import CourcesHorizontal from "./Reuse/CourcesHorizontal"
@@ -14,4 +15,5 @@ export {
     HorizontalOption,
     SubjectInput,
     CollegeSelect,
+    HomeHeader,
 }

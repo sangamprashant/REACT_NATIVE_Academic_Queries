@@ -10,9 +10,10 @@ const PDFFile = () => {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#111111", padding: 10 }}>
       {item && (
         <>
-          <Text>Subject: {item.subject}</Text>
-          <Text>Type: {item.type}</Text>
-          <Text>pdfPath: {item.pdfPath}</Text>
+          <Text style={{color:"white"}}>Subject: {item.subject}</Text>
+          <Text style={{color:"white"}}>Type: {item.type}</Text>
+          {/* pdf path is from firebase neede to show user the pdf :) */}
+          <Text style={{color:"white"}}>pdfPath: {item.pdfPath}</Text>
           
         </>
       )}

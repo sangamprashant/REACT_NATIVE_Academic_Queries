@@ -8,14 +8,14 @@ import {
   TextInput,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { AppContext } from "../../../AppContext/AppContext";
+import { AppContext } from "../../AppContext/AppContext";
 import {
   CollegeSelect,
   CourcesHorizontal,
   HorizontalOption,
   PaperTable,
   SubjectInput,
-} from "../../../components";
+} from "../../components";
 import axios from "axios";
 import { BASE_API } from "@env";
 
@@ -60,19 +60,16 @@ const CourseScreen = () => {
 
   useEffect(() => {
     let filteredPdfFiles = papers;
-
     if (searchYear) {
       filteredPdfFiles = filteredPdfFiles.filter(
         (file) => file.year === Number(searchYear)
       );
     }
-
     if (searchType) {
       filteredPdfFiles = filteredPdfFiles.filter((file) =>
         file.type.toLowerCase().includes(searchType.toLowerCase())
       );
     }
-
     if (searchInput) {
       filteredPdfFiles = filteredPdfFiles.filter((file) => {
         const subject = file.subject.toLowerCase();
@@ -80,9 +77,9 @@ const CourseScreen = () => {
         return subject.includes(searchTerm);
       });
     }
-
     setPdfFiles(filteredPdfFiles);
   }, [papers, searchYear, searchType, searchInput]);
+  
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#111111", padding: 10 }}>
       {/* <CourcesHorizontal courses={courses} courseName={courseName} /> */}

@@ -14,7 +14,6 @@ const PaperTable = ({ coursePath, courseName, loading, papers }) => {
   const router = useRouter();
 
   const handlePress = (item) => {
-    console.log("itemSend", item);
     router.push("(pdf)/pdfFile");
     router.setParams({ params: { item } });
   };

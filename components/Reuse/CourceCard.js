@@ -7,16 +7,18 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
-import { useNavigation } from "expo-router";
+import { useRouter } from "expo-router";
 
 const CourceCard = ({ course }) => {
-  const navigation = useNavigation();
+  const router = useRouter()
 
   const handleCoursePress = () => {
-    navigation.navigate("courseOpen", {
+
+    router.push("(courseOpen)/CourseScreen");
+    router.setParams({params:{
       coursePath: course.coursePath,
       courseName: course.courseName,
-    });
+  }});
   };
   return (
     <TouchableOpacity onPress={handleCoursePress}>

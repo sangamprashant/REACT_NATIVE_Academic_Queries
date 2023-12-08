@@ -4,13 +4,34 @@
     "web": {
       "bundler": "metro"
     },
-    "plugins": [
-      "expo-router"
-    ],
-    "name": "App",
-    "slug": "App",
+    "plugins": ["expo-router"],
+    "name": "Academic Queries",
+    "slug": "Academic Queries",
     "android": {
-      "package": "academicqueries.me"
-    }
+      "package": "academicqueries.me",
+      "runtimeVersion": "1.0.0"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "c1f965f2-2d7e-432c-badf-052826899031"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/c1f965f2-2d7e-432c-badf-052826899031"
+    },
+    "ios": {
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
+    },
+    "splash": {
+      "image": "./Images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#111111"
+    },
+    "icon": "./Images/icon.png"
   }
 }

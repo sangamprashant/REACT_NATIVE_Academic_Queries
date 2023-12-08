@@ -1,26 +1,63 @@
+import axios from "axios";
 import React, { useState } from "react";
 import {
-  View,
   Text,
   SafeAreaView,
-  ScrollView,
   KeyboardAvoidingView,
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from "react-native";
+import { BASE_API } from "@env";
+import * as Animatable from "react-native-animatable";
 
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSendMessage = () => {
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Subject:", subject);
-    console.log("Message:", message);
+  const handleSendMessage = async () => {
+    if (!name || !email || !subject || !message) {
+      return Alert.alert("Invalid inputs!", "All fields are required.");
+    }
+    if (!validateEmail(email)) {
+      return Alert.alert(
+        "Invalid Email",
+        "Please enter a valid email address."
+      );
+    }
+    setLoading(true);
+    const reqBody = {
+      name: name,
+      to: email,
+      subject: subject,
+      input: message,
+    };
+    try {
+      const response = await axios.post(
+        `${BASE_API}/public/sendemail`,
+        reqBody
+      );
+      if (response.data.message) {
+        setEmail("");
+        setMessage("");
+        setName("");
+        setSubject("");
+        Alert.alert("Message Sent", "Thank you for reaching out!");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   return (
@@ -67,9 +104,27 @@ const Contact = () => {
           onChangeText={(text) => setMessage(text)}
           multiline
         />
-        <TouchableOpacity style={styles.sendButton} onPress={handleSendMessage}>
-          <Text style={styles.sendButtonText}>Send Message</Text>
-        </TouchableOpacity>
+        {!loading ? (
+          <Animatable.View
+            animation={loading ? "fadeOut" : "fadeIn"}
+            duration={500}
+            style={[styles.sendButton, loading && styles.hidden]}
+          >
+            <TouchableOpacity onPress={handleSendMessage} disabled={loading}>
+              <Text style={styles.sendButtonText}>Send Message</Text>
+            </TouchableOpacity>
+          </Animatable.View>
+        ): (
+          <Animatable.View
+            animation={!loading ? "fadeOut" : "fadeIn"}
+            duration={500}
+            style={[styles.sendButton, loading && styles.hidden]}
+          >
+            <TouchableOpacity disabled={!loading}>
+              <Text style={styles.sendButtonText}>Sending Message</Text>
+            </TouchableOpacity>
+          </Animatable.View>
+        )}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -100,11 +155,10 @@ const styles = StyleSheet.create({
     color: "white",
   },
   input: {
-    height: 40,
     borderColor: "#cecece1c",
     borderWidth: 1,
     marginBottom: 20,
-    paddingHorizontal: 10,
+    padding: 10,
     width: "100%",
     fontSize: 16,
     color: "white",
