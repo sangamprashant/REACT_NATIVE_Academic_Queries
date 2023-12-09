@@ -1,20 +1,20 @@
-import React from "react";
-import { View, Text, SafeAreaView } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import React from "react";
+import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 
 const PDFFile = () => {
   const route = useRoute();
   const { item } = route?.params;
 
+  // console.log(item?.pdfPath);
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#111111", padding: 10 }}>
       {item && (
         <>
-          <Text style={{color:"white"}}>Subject: {item.subject}</Text>
-          <Text style={{color:"white"}}>Type: {item.type}</Text>
-          {/* pdf path is from firebase neede to show user the pdf :) */}
-          <Text style={{color:"white"}}>pdfPath: {item.pdfPath}</Text>
-          
+          <Text style={{ color: "white" }}>Subject: {item.subject}</Text>
+          <Text style={{ color: "white" }}>College: {item.type}</Text>
+
         </>
       )}
     </SafeAreaView>

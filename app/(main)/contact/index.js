@@ -138,9 +138,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   formContainer: {
-    width: "80%",
+    width: "90%",
+    backgroundColor:"#e6e6e614",
+    padding:10,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius:10,
   },
   heading: {
     fontSize: 45,
@@ -157,7 +160,7 @@ const styles = StyleSheet.create({
   input: {
     borderColor: "#cecece1c",
     borderWidth: 1,
-    marginBottom: 20,
+    marginBottom: 10,
     padding: 10,
     width: "100%",
     fontSize: 16,
@@ -172,7 +175,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 5,
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 10,
+    marginBottom:10,
+    width:"100%",
   },
   sendButtonText: {
     color: "#fff",

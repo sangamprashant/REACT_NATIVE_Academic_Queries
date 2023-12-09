@@ -5,17 +5,24 @@ import {
   StyleSheet,
   ActivityIndicator,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 import React from "react";
 import { useRouter } from "expo-router";
-import { WebView } from 'react-native-webview';
 
 const PaperTable = ({ coursePath, courseName, loading, papers }) => {
   const router = useRouter();
 
-  const handlePress = (item) => {
-    router.push("(pdf)/pdfFile");
-    router.setParams({ params: { item } });
+  const handlePress = async (item) => {
+
+    //sends data to pdf container which shows in app only
+    // router.push("(pdf)/pdfFile");
+    // router.setParams({ params: { item } });
+
+    //opens in default app
+    Linking.openURL(item.pdfPath).catch((err) =>
+      console.error("Error opening global link:", err)
+    );
   };
 
   const renderItem = ({ item }) => (
