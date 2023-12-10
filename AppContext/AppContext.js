@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BASE_API } from "@env";
+import {BaseApi} from "../config"
 import axios from "axios";
 
 const AppContext = React.createContext();
@@ -11,7 +11,7 @@ const AppProvider = ({ children }) => {
   }, []);
   const fetchCourses = async () => {
     try {
-      const response = await axios.get(`${BASE_API}/get/course`);
+      const response = await axios.get(`${BaseApi}/get/course`);
       if (response) {
         setCourses(response.data);
       }

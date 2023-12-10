@@ -15,6 +15,7 @@ const PDFFile = () => {
           <Text style={{ color: "white" }}>Subject: {item.subject}</Text>
           <Text style={{ color: "white" }}>College: {item.type}</Text>
           <Text style={{ color: "white" }}>PDF Link : {item.pdfPath}</Text>
+          {/* pdf to show here */}
         </>
       )}
     </SafeAreaView>

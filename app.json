@@ -8,7 +8,7 @@
     "plugins": [
       "expo-router"
     ],
-    "name": "AcademicQueries",
+    "name": "Academic Queries",
     "slug": "AcademicQueries",
     "extra": {
       "router": {
@@ -26,6 +26,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#111111"
     },
-    "icon": "./Images/splash.png"
+    "icon": "./Images/splash.jpg"
   }
 }

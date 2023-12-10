@@ -1,28 +1,22 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
-  Text,
   SafeAreaView,
-  FlatList,
   StyleSheet,
-  TextInput,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { AppContext } from "../../AppContext/AppContext";
 import {
   CollegeSelect,
-  CourcesHorizontal,
   HorizontalOption,
   PaperTable,
   SubjectInput,
 } from "../../components";
 import axios from "axios";
-import { BASE_API } from "@env";
+import { BaseApi } from "../../config";
 
 const CourseScreen = () => {
   const route = useRoute();
   const { coursePath, courseName } = route.params;
-  const { courses } = useContext(AppContext);
   const [pdfFiles, setPdfFiles] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [searchYear, setSearchYear] = useState("");
@@ -41,7 +35,7 @@ const CourseScreen = () => {
   const fetchPaper = async (coursePath) => {
     try {
       setLoading(true);
-      const response = await axios.get(`${BASE_API}/course/${coursePath}`);
+      const response = await axios.get(`${BaseApi}/course/${coursePath}`);
       setPapers(response.data);
     } catch (error) {
       console.log(error);
@@ -82,7 +76,6 @@ const CourseScreen = () => {
   
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#111111", padding: 10 }}>
-      {/* <CourcesHorizontal courses={courses} courseName={courseName} /> */}
       {papers.length > 0 && (
         <View>
           <View style={styles.yearAndInput}>

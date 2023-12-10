@@ -9,8 +9,7 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
-import { BASE_API } from "@env";
-import * as Animatable from "react-native-animatable";
+import { BaseApi } from "../../../config";
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -37,10 +36,7 @@ const Contact = () => {
       input: message,
     };
     try {
-      const response = await axios.post(
-        `${BASE_API}/public/sendemail`,
-        reqBody
-      );
+      const response = await axios.post(`${BaseApi}/public/sendemail`, reqBody);
       if (response.data.message) {
         setEmail("");
         setMessage("");
@@ -105,25 +101,24 @@ const Contact = () => {
           multiline
         />
         {!loading ? (
-          <Animatable.View
+          <TouchableOpacity
             animation={loading ? "fadeOut" : "fadeIn"}
             duration={500}
             style={[styles.sendButton, loading && styles.hidden]}
+            onPress={handleSendMessage}
+            disabled={loading}
           >
-            <TouchableOpacity onPress={handleSendMessage} disabled={loading}>
-              <Text style={styles.sendButtonText}>Send Message</Text>
-            </TouchableOpacity>
-          </Animatable.View>
-        ): (
-          <Animatable.View
+            <Text style={styles.sendButtonText}>Send Message</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
             animation={!loading ? "fadeOut" : "fadeIn"}
             duration={500}
             style={[styles.sendButton, loading && styles.hidden]}
+            disabled={!loading}
           >
-            <TouchableOpacity disabled={!loading}>
-              <Text style={styles.sendButtonText}>Sending Message</Text>
-            </TouchableOpacity>
-          </Animatable.View>
+            <Text style={styles.sendButtonText}>Sending Message</Text>
+          </TouchableOpacity>
         )}
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -139,11 +134,11 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     width: "90%",
-    backgroundColor:"#e6e6e614",
-    padding:10,
+    backgroundColor: "#e6e6e614",
+    padding: 10,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius:10,
+    borderRadius: 10,
   },
   heading: {
     fontSize: 45,
@@ -176,13 +171,18 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     marginTop: 10,
-    marginBottom:10,
-    width:"100%",
+    marginBottom: 10,
+    width: "100%",
   },
   sendButtonText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  touchableButton: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
