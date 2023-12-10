@@ -19,10 +19,11 @@ const PaperTable = ({ coursePath, courseName, loading, papers }) => {
     // router.push("(pdf)/pdfFile");
     // router.setParams({ params: { item } });
 
-    //opens in default app
+    //opens in default app like chrome etc.
     Linking.openURL(item.pdfPath).catch((err) =>
       console.error("Error opening global link:", err)
     );
+    
   };
 
   const renderItem = ({ item }) => (
