@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Image } from "react-native";
+import React from "react";
 import { Redirect } from "expo-router";
 import { AppProvider } from "../AppContext/AppContext";
 
 const Index = () => {
-
-
-  return <Redirect href="/(main)/home" />;
+  return (
+    <AppProvider>
+      <Redirect href="/(main)/home" />
+    </AppProvider>
+  );
 };
 
 export default Index;

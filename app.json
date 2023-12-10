@@ -1,34 +1,25 @@
 {
   "expo": {
     "scheme": "acme",
+    "sdkVersion": "49.0.0",
     "web": {
       "bundler": "metro"
     },
     "plugins": [
       "expo-router"
     ],
-    "name": "Academic Queries",
-    "slug": "App",
-    "android": {
-      "package": "academicqueries.me",
-      "runtimeVersion": "1.4.0"
-    },
+    "name": "AcademicQueries",
+    "slug": "AcademicQueries",
     "extra": {
       "router": {
         "origin": false
       },
       "eas": {
-        "projectId": "c1f965f2-2d7e-432c-badf-052826899031"
+        "projectId": "3c862752-108d-46f9-a36f-1a6a89eb2261"
       }
     },
-    "updates": {
-      "url": "https://u.expo.dev/c1f965f2-2d7e-432c-badf-052826899031"
-    },
-    "ios": {
-      "runtimeVersion": {
-        "policy": "appVersion"
-      },
-      "bundleIdentifier": "academicqueries.me"
+    "android": {
+      "package": "com.sangamprashant.AcademicQueries"
     },
     "splash": {
       "image": "./Images/splash.png",
