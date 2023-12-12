@@ -1,5 +1,5 @@
 import { BASE_API } from "@env";
 
-const BaseApi = BASE_API;
+const BaseApi = "https://academic-quries-question-paper-mern.vercel.app/api";
 
 export { BaseApi };

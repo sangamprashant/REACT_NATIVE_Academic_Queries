@@ -1,17 +1,38 @@
-import { View, Text, SafeAreaView } from "react-native";
 import React from "react";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
+import { UploadForm } from "../../../components";
 
-const upload = () => {
+const Upload = () => {
   return (
-    <SafeAreaView style={{
-      flex: 1,
-      backgroundColor: "#111111",
-      justifyContent: "center",
-      alignItems: "center",
-    }}>
-      <Text style={{color:"white"}}>upload! need to build</Text>
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        style={{ width: "100%" }}
+        contentContainerStyle={styles.scrollContainer}
+      >
+        <UploadForm/>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default upload;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#111111",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+
+export default Upload;
