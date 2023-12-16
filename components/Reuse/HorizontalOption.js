@@ -24,12 +24,12 @@ const HorizontalOption = ({ AppOptions, courseName, setSearchYear }) => {
               padding: 10,
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: !courseName ? "#3498db" : "white",
+              backgroundColor: !courseName ? "gray" : "white",
             }}
           >
             <Text
               style={{
-                color: !courseName ? "white" : "#3498db",
+                color: !courseName ? "white" : "black",
               }}
             >
               All
@@ -46,12 +46,12 @@ const HorizontalOption = ({ AppOptions, courseName, setSearchYear }) => {
                 padding: 10,
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: courseName === course ? "#3498db" : "white",
+                backgroundColor: courseName === course ? "gray" : "white",
               }}
             >
               <Text
                 style={{
-                  color: courseName === course ? "white" : "#3498db",
+                  color: courseName === course ? "white" : "black",
                 }}
               >
                 {course}

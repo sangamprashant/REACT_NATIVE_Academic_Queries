@@ -104,9 +104,9 @@ const UploadForm = () => {
         setCourse("");
         setSelectedFile(null);
         Alert.alert(
-          "Thanks for uploading question paper",
-          "We are thankful for your contribution"
-        );
+          "Upload Successful!",
+          `Thank you, ${name}! Your question paper has been successfully uploaded. Your contribution to our community is greatly appreciated.`
+        );        
       } else {
         console.log("Failed to save data. Status:", response.status);
       }
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
   messageInput: {
     height: 100,
   },
-  pdfSelect: { backgroundColor: "#333333" },
+  pdfSelect: { backgroundColor: "#ffffff21" },
 
   sendButton: {
     backgroundColor: "#3d68ff",
