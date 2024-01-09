@@ -1,5 +1,4 @@
-import { BASE_API } from "@env";
-
-const BaseApi = "https://academic-quries-question-paper-mern.vercel.app/api";
+const BaseApi = "https://aq-client-server.vercel.app/api";
 
 export { BaseApi };
+// const BaseApi = "http://10.0.2.2:8000/api";

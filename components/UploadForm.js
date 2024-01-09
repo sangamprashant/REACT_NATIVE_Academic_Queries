@@ -11,7 +11,7 @@ import {
 import * as DocumentPicker from "expo-document-picker";
 import React, { useState } from "react";
 import { storage } from "../firebaseConfig";
-import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import axios from "axios";
 import { BaseApi } from "../config";
 

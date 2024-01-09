@@ -1,31 +1,44 @@
 {
   "expo": {
     "scheme": "acme",
-    "sdkVersion": "49.0.0",
+    "name": "Academic Queries",
+    "slug": "AcademicQueriesApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon1.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#111111"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sangamprashant.AcademicQueriesApp"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon1.png",
+        "backgroundColor": "#111111"
+      },
+      "package": "com.sangamprashant.AcademicQueriesApp"
+    },
     "web": {
-      "bundler": "metro"
+      "favicon": "./assets/icon1.png"
     },
     "plugins": [
-      "expo-router","expo-document-picker"
+      "expo-router"
     ],
-    "name": "Academic Queries",
-    "slug": "AcademicQueries",
     "extra": {
       "router": {
         "origin": false
       },
       "eas": {
-        "projectId": "3c862752-108d-46f9-a36f-1a6a89eb2261"
+        "projectId": "fc9ad781-dcea-4cf8-a6f2-64366515e435"
       }
-    },
-    "android": {
-      "package": "com.sangamprashant.AcademicQueries"
-    },
-    "splash": {
-      "image": "./Images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#111111"
-    },
-    "icon": "./Images/splash.jpg"
+    }
   }
 }

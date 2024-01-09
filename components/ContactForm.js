@@ -2,13 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import {
   Text,
-  SafeAreaView,
   KeyboardAvoidingView,
   TextInput,
   TouchableOpacity,
   StyleSheet,
   Alert,
-  ScrollView,
 } from "react-native";
 import { BaseApi } from "../config";
 
@@ -20,7 +18,7 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
 
   const handleSendMessage = async () => {
-    if (!name || !email || !subject || !message) {
+    if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
       return Alert.alert("Invalid inputs!", "All fields are required.");
     }
     if (!validateEmail(email)) {
@@ -31,13 +29,21 @@ const Contact = () => {
     }
     setLoading(true);
     const reqBody = {
-      name: name,
-      to: email,
-      subject: subject,
-      input: message,
+      name: name.trim(),
+      to: email.trim(),
+      subject: subject.trim(),
+      input: message.trim(),
     };
     try {
-      const response = await axios.post(`${BaseApi}/public/sendemail`, reqBody);
+      const response = await axios.post(
+        `${BaseApi}/public/sendemail`,
+        reqBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (response.data.message) {
         setEmail("");
         setMessage("");
@@ -47,6 +53,7 @@ const Contact = () => {
       }
     } catch (error) {
       console.log(error);
+      Alert.alert("Somethig went wrong!", "Please try later.");
     } finally {
       setLoading(false);
     }

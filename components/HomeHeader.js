@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   TouchableOpacity,
@@ -6,10 +6,16 @@ import {
   StyleSheet,
   Linking,
   Text,
+  Modal,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import Rating from "./Drawable/Rating";
 
 const HomeHeader = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   const openGlobalLink = () => {
     const globalLink = "https://academicqueries.me";
     Linking.openURL(globalLink).catch((err) =>
@@ -19,7 +25,10 @@ const HomeHeader = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.iconButton}>
+      <TouchableOpacity
+        style={styles.iconButton}
+        onPress={() => setModalVisible(true)}
+      >
         <Image
           source={require("../Images/icon.png")}
           style={styles.iconImage}
@@ -31,6 +40,37 @@ const HomeHeader = () => {
       <TouchableOpacity style={styles.earthButton} onPress={openGlobalLink}>
         <FontAwesome name="globe" size={50} color="black" />
       </TouchableOpacity>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <TouchableOpacity
+          style={styles.modalContainer}
+          onPress={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <TouchableWithoutFeedback>
+            <View style={styles.modalContent}>
+              <View style={styles.closeBtn}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                  }}
+                >
+                  <FontAwesome name="times" size={30} color="white" />
+                </TouchableOpacity>
+              </View>
+              <Rating setModalVisible={setModalVisible}/>
+            </View>
+          </TouchableWithoutFeedback>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 };
@@ -56,6 +96,22 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     paddingHorizontal: 4,
     paddingVertical: 2,
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalContent: {
+    backgroundColor: "#272727",
+    padding: 20,
+    width: "90%",
+    height: "100%",
+    borderRadius: 10,
+  },
+  closeBtn: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    marginBottom: 20,
   },
 });
 

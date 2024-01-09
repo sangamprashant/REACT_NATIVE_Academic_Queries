@@ -1,3 +1,4 @@
 import bgImage from "./bgImg.jpg";
+import Big from "./big.png"
 
-export { bgImage };
+export { bgImage, Big };
